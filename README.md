@@ -11,6 +11,10 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 
 <img width="1111" height="768" alt="Network Diagram (1)" src="https://github.com/user-attachments/assets/90225f34-f55a-4ed9-b636-e658c29e80b5" />
 
+## Dashboard
+
+<img width="1919" height="1041" alt="image" src="https://github.com/user-attachments/assets/3b24f60d-8198-482f-bf7a-80871999facb" />
+
 
 ## Stack Overview
 
