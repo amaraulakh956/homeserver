@@ -7,6 +7,11 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 - 1TB Storage
 - Connected via WiFi
 
+## Network Diagram
+
+<img width="1111" height="768" alt="Network Diagram (1)" src="https://github.com/user-attachments/assets/90225f34-f55a-4ed9-b636-e658c29e80b5" />
+
+
 ## Stack Overview
 
 ### Media
