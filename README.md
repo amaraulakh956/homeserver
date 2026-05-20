@@ -50,6 +50,8 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 - **Watchtower** - Automatic Docker container updates
 - **Netdata** - Real time system performance monitoring
 - **Homarr** - Unified dashboard for all services
+- 
+> For a detailed breakdown of each service and why it was chosen, see [SERVICES.md](SERVICES.md).
 
 ## Architecture
 All services run as Docker containers managed with Docker Compose. Each service has its own stack folder under `/opt/stacks/`.
