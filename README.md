@@ -91,3 +91,11 @@ Movies and TV shows are automatically downloaded using the arr stack:
 
 - `scripts/backup.sh` — backs up all Docker volumes and compose files, keeps 7 days of history
 - `scripts/sync-music.sh` — syncs your local music library to the server via rsync
+
+## License
+
+MIT — see [LICENSE](LICENSE) for details.
+
+## Contributing
+
+See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
