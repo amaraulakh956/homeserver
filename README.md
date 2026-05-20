@@ -1,3 +1,11 @@
+![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
+![Linux](https://img.shields.io/badge/Linux-Server-FCC624?style=for-the-badge&logo=linux&logoColor=black)
+![Tailscale](https://img.shields.io/badge/Tailscale-VPN-242424?style=for-the-badge&logo=tailscale&logoColor=white)
+![AdGuard](https://img.shields.io/badge/AdGuard-DNS-68BC71?style=for-the-badge&logo=adguard&logoColor=white)
+![Jellyfin](https://img.shields.io/badge/Jellyfin-Media-00A4DC?style=for-the-badge&logo=jellyfin&logoColor=white)
+![Nextcloud](https://img.shields.io/badge/Nextcloud-Storage-0082C9?style=for-the-badge&logo=nextcloud&logoColor=white)
+![GitHub](https://img.shields.io/badge/Self--Hosted-Project-181717?style=for-the-badge&logo=github&logoColor=white)
 # Home Server Setup
 
 A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docker.
