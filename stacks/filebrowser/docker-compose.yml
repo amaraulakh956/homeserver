@@ -1,0 +1,12 @@
+services:
+  filebrowser:
+    image: hurlenko/filebrowser
+    container_name: filebrowser
+    restart: unless-stopped
+    ports:
+      - "8082:8080"
+    volumes:
+      - /opt/media:/data
+      - ./config:/config
+    environment:
+      - FB_BASEURL=/
