@@ -205,5 +205,6 @@ Then trigger a scan in Navidrome at `http://your-server-ip:4533`.
 | Jackett | `http://your-server-ip:9117` |
 | Bazarr | `http://your-server-ip:6767` |
 | Filebrowser | `http://your-server-ip:8082` |
+| searXNG | `http://your-server-ip:8099` |
 
 For remote access, replace `your-server-ip` with your server's Tailscale IP.
