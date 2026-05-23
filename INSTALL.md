@@ -4,7 +4,7 @@ A complete guide to recreating this home server setup from scratch.
 
 ## Prerequisites
 
-- A laptop or PC with at least 4GB RAM and 500GB storage
+- A laptop or PC with at least 4GB RAM 
 - A USB drive (8GB+)
 - A Tailscale account (free) — [tailscale.com](https://tailscale.com)
 - An OpenSubtitles account (free) — [opensubtitles.com](https://www.opensubtitles.com)
