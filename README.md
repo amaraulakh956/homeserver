@@ -86,6 +86,7 @@ Movies and TV shows are automatically downloaded using the arr stack:
 | Jackett | 9117 |
 | Bazarr | 6767 |
 | Filebrowser | 8082 |
+| SearXNG | 8099 |
 
 ## Scripts
 
