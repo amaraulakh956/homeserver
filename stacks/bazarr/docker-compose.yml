@@ -13,3 +13,9 @@ services:
       - ./config:/config
       - /opt/media/movies:/movies
       - /opt/media/shows:/tv
+    networks:
+      - caddy-proxy
+
+networks:
+  caddy-proxy:
+    external: true

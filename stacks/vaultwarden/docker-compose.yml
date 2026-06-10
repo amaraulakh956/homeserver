@@ -1,0 +1,16 @@
+services:
+  vaultwarden:
+    image: vaultwarden/server:latest
+    container_name: vaultwarden
+    restart: unless-stopped
+    volumes:
+      - ./data:/data
+    environment:
+      - DOMAIN=https://vaultwarden.home:8443
+      - ROCKET_PORT=80
+    networks:
+      - caddy-proxy
+
+networks:
+  caddy-proxy:
+    external: true

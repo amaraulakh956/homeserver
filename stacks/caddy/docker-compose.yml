@@ -1,15 +1,14 @@
 services:
-  filebrowser:
-    image: hurlenko/filebrowser
-    container_name: filebrowser
+  caddy:
+    image: caddy:latest
+    container_name: caddy
     restart: unless-stopped
     ports:
-      - "8082:8080"
+      - "8443:443"
     volumes:
-      - /opt/media:/data
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+      - ./data:/data
       - ./config:/config
-    environment:
-      - FB_BASEURL=/
     networks:
       - caddy-proxy
 

@@ -1,0 +1,27 @@
+services:
+  tdarr:
+    image: ghcr.io/haveagitgat/tdarr:latest
+    container_name: tdarr
+    restart: unless-stopped
+    ports:
+      - "8265:8265"
+      - "8266:8266"
+    environment:
+      - TZ=America/Toronto
+      - PUID=1000
+      - PGID=1000
+      - UMASK_SET=002
+      - serverIP=0.0.0.0
+      - serverPort=8266
+      - webUIPort=8265
+      - internalNode=true
+      - internalNodeIP=0.0.0.0
+      - nodeID=MyInternalNode
+    volumes:
+      - ./server:/app/configs
+      - ./logs:/app/logs
+      - ./temp:/temp
+      - /opt/media/movies:/media/movies
+      - /opt/media/shows:/media/shows
+    devices:
+      - /dev/dri:/dev/dri

@@ -1,0 +1,12 @@
+services:
+  headscale:
+    image: headscale/headscale:latest
+    container_name: headscale
+    restart: unless-stopped
+    ports:
+      - "443:8085"
+    volumes:
+      - ./config:/etc/headscale
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./data:/var/lib/headscale
+    command: serve
