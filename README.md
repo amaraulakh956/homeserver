@@ -20,9 +20,6 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 
 ![Network Diagram](diagram.png)
 
-## Dashboard
-
-![Homarr Dashboard](homarr.png)
 
 ## Stack Overview
 
