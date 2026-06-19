@@ -1,11 +1,12 @@
 ![Debian](https://img.shields.io/badge/Debian-12-A81D33?style=for-the-badge&logo=debian&logoColor=white)
 ![Docker](https://img.shields.io/badge/Docker-Compose-2496ED?style=for-the-badge&logo=docker&logoColor=white)
 ![Linux](https://img.shields.io/badge/Linux-Server-FCC624?style=for-the-badge&logo=linux&logoColor=black)
-![Tailscale](https://img.shields.io/badge/Tailscale-VPN-242424?style=for-the-badge&logo=tailscale&logoColor=white)
+![Headscale](https://img.shields.io/badge/Headscale-VPN-242424?style=for-the-badge&logo=tailscale&logoColor=white)
 ![AdGuard](https://img.shields.io/badge/AdGuard-DNS-68BC71?style=for-the-badge&logo=adguard&logoColor=white)
 ![Jellyfin](https://img.shields.io/badge/Jellyfin-Media-00A4DC?style=for-the-badge&logo=jellyfin&logoColor=white)
 ![Nextcloud](https://img.shields.io/badge/Nextcloud-Storage-0082C9?style=for-the-badge&logo=nextcloud&logoColor=white)
 ![GitHub](https://img.shields.io/badge/Self--Hosted-Project-181717?style=for-the-badge&logo=github&logoColor=white)
+
 # Home Server Setup
 
 A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docker.
@@ -13,28 +14,32 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 ## Hardware
 - 2017 Acer Laptop
 - 1TB Storage
-- Connected via WiFi
+- Connected via Ethernet
 
 ## Network Diagram
 
-<img width="1111" height="768" alt="Network Diagram (1)" src="https://github.com/user-attachments/assets/90225f34-f55a-4ed9-b636-e658c29e80b5" />
+![Network Diagram](diagram.png)
 
 ## Dashboard
 
-<img width="1919" height="1041" alt="image" src="https://github.com/user-attachments/assets/3b24f60d-8198-482f-bf7a-80871999facb" />
-
+![Homarr Dashboard](homarr.png)
 
 ## Stack Overview
 
+> For a detailed breakdown of each service and why it was chosen, see [SERVICES.md](SERVICES.md).
+
 ### Media
 - **Navidrome** - Music streaming server with Subsonic API support
-- **Jellyfin** - Movies and TV shows media server
+- **Jellyfin** - Movies and TV shows media server with Intel QSV hardware transcoding
+- **Jellyseerr** - Request interface for movies and shows, integrates with Radarr and Sonarr
 - **Radarr** - Automatic movie downloading and management
-- **Sonarr** - Automatic TV show downloading and management
+- **Sonarr** - Automatic TV show and anime downloading and management
 - **Prowlarr** - Indexer manager for Radarr and Sonarr
-- **Jackett** - Additional indexer support for public trackers
+- **Jackett** - Additional indexer support for public trackers (YTS, 1337x, Nyaa.si, Pirate Bay)
 - **qBittorrent** - Torrent download client
 - **Bazarr** - Automatic subtitle downloading for Jellyfin
+- **Tdarr** - Automated media transcoding to save disk space
+- **FlareSolverr** - Cloudflare bypass for Jackett indexers
 
 ### Storage & Files
 - **Nextcloud** - Self hosted cloud storage with cross device sync
@@ -42,42 +47,47 @@ A self-hosted home server running on a 2017 Acer laptop with Debian 12 and Docke
 
 ### Network & Privacy
 - **AdGuard Home** - Network wide ad blocking and DNS privacy with DNS-over-HTTPS
-- **Tailscale** - Secure remote access VPN to all services from anywhere
+- **Headscale** - Self-hosted WireGuard coordination server replacing Tailscale
+- **Caddy** - Reverse proxy with automatic HTTPS via Let's Encrypt
+
+### Productivity
+- **Vaultwarden** - Self hosted Bitwarden password manager
+- **SearXNG** - Self hosted private search engine
 
 ### Monitoring & Management
 - **Portainer** - Docker container management dashboard
 - **Uptime Kuma** - Service uptime monitoring and alerting
 - **Watchtower** - Automatic Docker container updates
-- **Netdata** - Real time system performance monitoring
 - **Homarr** - Unified dashboard for all services
-- 
-> For a detailed breakdown of each service and why it was chosen, see [SERVICES.md](SERVICES.md).
 
 ## Architecture
-All services run as Docker containers managed with Docker Compose. Each service has its own stack folder under `/opt/stacks/`.
+All services run as Docker containers managed with Docker Compose. Each service has its own stack folder under `/opt/stacks/`. Caddy handles reverse proxy and HTTPS for all services using a Let's Encrypt certificate issued for the DuckDNS domain.
 
 ## Remote Access
-Remote access is handled via Tailscale VPN. AdGuard Home is configured as the DNS server for all Tailscale devices, providing ad blocking and DNS privacy everywhere.
+Remote access is handled via **Headscale** — a self-hosted open source replacement for Tailscale's coordination server. All devices connect via WireGuard encrypted tunnels. AdGuard Home is configured as the DNS server for all connected devices, providing ad blocking and DNS-over-HTTPS privacy everywhere.
+
+A DuckDNS domain with auto-renewing Let's Encrypt certificates provides trusted HTTPS for Headscale and all services.
 
 ## Media Management
 Movies and TV shows are automatically downloaded using the arr stack:
-1. Add movie/show to Radarr/Sonarr
-2. Prowlarr and Jackett search indexers for the best release
-3. qBittorrent downloads the file
-4. Radarr/Sonarr moves it to the correct media folder
-5. Jellyfin picks it up automatically
-6. Bazarr downloads English subtitles automatically
+1. Request content in Jellyseerr
+2. Jellyseerr sends the request to Radarr or Sonarr
+3. Prowlarr and Jackett search indexers for the best release
+4. qBittorrent downloads the file
+5. Radarr/Sonarr moves it to the correct media folder
+6. Jellyfin picks it up automatically
+7. Bazarr downloads English subtitles automatically
 
 ## Services & Ports
 | Service | Port |
 |---|---|
 | Navidrome | 4533 |
 | Jellyfin | 8096 |
+| Jellyseerr | 5055 |
 | Nextcloud | 8080 |
 | AdGuard Home | 8889 |
 | Portainer | 9000 |
 | Uptime Kuma | 3001 |
-| Netdata | 19999 |
 | Homarr | 7575 |
 | qBittorrent | 8090 |
 | Radarr | 7878 |
@@ -87,6 +97,9 @@ Movies and TV shows are automatically downloaded using the arr stack:
 | Bazarr | 6767 |
 | Filebrowser | 8082 |
 | SearXNG | 8099 |
+| Vaultwarden | 8181 |
+| Tdarr | 8265 |
+| Headscale | 443 |
 
 ## Scripts
 
